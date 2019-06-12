@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+<head>
+ <title>Utworz wydarzenie</title>
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+</head>
+<body>
+  <h2>Utworz wydarzenie</h2>
+  <div class="container">
+  <form class="form-horizontal" role="form" method="POST" th:action="@{/home/save_event}" th:object="${newEvent}">
+  <form:hidden path="id"/>
+  <div class="form-grup">
+  	<label>Nazwa</label>
+  	<input type="text" th:field="*{name}" class="form-control" id="name" required autofocus>
+  </div>
+  <div class="form-grup">
+  	<label>Miasto</label>
+  	<input type="text" th:field="*{city}" class="form-control" id="city" required autofocus>
+  </div>
+  <div class="form-grup">
+  	<label>Data</label>
+  	<input type="text" th:field="*{date}" class="form-control" id="date" required autofocus>
+  </div>
+  <div class="form-grup">
+  	<label>Ilosc miejsc</label>
+  	<input type="text" th:field="*{space}" class="form-control" id="space" required autofocus>
+  </div>
+  <div class="form-grup">
+  	<label>Gra</label>
+  	<input type="text" th:field="*{game}" class="form-control" id="game" required autofocus>
+  </div>
+  <div class="form-grup">
+  	<label>Info</label>
+  	<input type="text" th:field="*{info}" class="form-control" id="info" required autofocus>
+  </div>
+  <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Utworzo</button>
+  <a class="btn btn-primary" th:href="@{/home/event_list/}" role="button" >Anuluj</a>
+ </div>
+</body>
+</html>

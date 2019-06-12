@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ 
+<head>
+ <title>Wydarzenia</title>
+ <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+ <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+</head>
+<body>
+ <div class="container">
+  <h2>Wydarzenia</h2>
+  <table class="table table-striped">
+   <thead>
+    <th scope="row">Nazwa</th>
+    <th scope="row">Gra</th>
+    <th scope="row">Ilosc miejsc</th>
+    <th scope="row"></th>
+    <th scope="row"></th>
+   </thead>
+   <tbody>
+   	<tr th:if="${eventList.empty}">
+   		<td colspan="2">Brak wydarzeñ</td>
+   	</tr>
+   	<tr th:each="event : ${eventList}">
+	   	<td><a th:href="@{'/home/grup/' + ${event.id}}" th:text="${event.name}"></a></td>
+	   	<td><span th:text="${event.game}"></span></td>
+	   	<td><span th:text="${event.space}"></span></td>
+	   	<td th:switch="${not #sets.contains(events, event.id)}">
+	   		<div th:case="${true}">
+		   		<div th:switch="${event.space &gt; 0}">
+		   			<a th:case="${true}" class="btn btn-primary" th:href="@{'/home/join/' + ${event.id}}" role="button">Dolacz</a>
+		   			<span th:case="*">Brak miejsc</span>
+		   		</div>
+	   		</div>
+	   		<div th:case="*">
+	   			<a class="btn btn-warning" th:href="@{'/home/leave/' + ${event.id}}" role="button">Wyjdz</a>
+	   		</div>
+	   	</td>
+	   	<td>
+	   		<div th:switch="${event?.leader == user?.id}">
+	   			<a th:case="${true}" class="btn btn-danger" th:href="@{'/home/delete/' + ${event.id}}" role="button">Usun</a>
+	   			<span th:case="*"></span>
+	   		</div>
+	   	</td>
+   	</tr>
+   </tbody>
+  </table>
+  <a class="btn btn-primary" th:href="@{/home/add_event/}" role="button" >UtwÃ³rz</a>
+  <a th:href="@{/logout}">Wyloguj</a>
+ </div>
+</body>
+</html>
